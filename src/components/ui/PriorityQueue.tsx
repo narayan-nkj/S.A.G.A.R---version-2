@@ -12,7 +12,7 @@ interface PriorityQueueProps {
 }
 
 export default function PriorityQueue({ anomalies, onSelectAnomaly, onViewDetails, selectedId, isLoading }: PriorityQueueProps) {
-  const hoverTimeoutRef = React.useRef<NodeJS.Timeout | null>(null);
+  const hoverTimeoutRef = React.useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const handleHover = (id: string) => {
     if (hoverTimeoutRef.current) clearTimeout(hoverTimeoutRef.current);

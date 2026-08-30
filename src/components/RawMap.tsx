@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useEffect, useRef, useState, useMemo, forwardRef, useImperativeHandle } from 'react';
 import { createPortal } from 'react-dom';
 import * as maplibregl from 'maplibre-gl';
+import 'maplibre-gl/dist/maplibre-gl.css';
 import { useTheme } from '../contexts/ThemeContext';
 
 const MapContext = createContext<maplibregl.Map | null>(null);
