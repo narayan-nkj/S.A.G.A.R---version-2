@@ -50,6 +50,18 @@ export const getAnomalies = async (filters?: AnomalyFilters, harbour?: string): 
      const seed = harbour.charCodeAt(0) + harbour.length;
      const anomalyCount = 3 + (seed % 6); // Generate 3 to 8 distinct anomalies per harbour
      
+     const explanations = [
+       "The model detected a high-contrast edge cluster that differs from the local seabed texture.",
+       "A distinct shadow indicates an object protruding 2.5m above the seabed. Geometric regularity suggests a man-made origin.",
+       "Matches acoustic signature and coordinates of known sunken barge (Wreck #45).",
+       "Area of high reflectivity contrasting with surrounding mud. Potential debris field.",
+       "Initially flagged as an anomaly due to aeration in the water column.",
+       "Significant scouring observed around existing pipeline infrastructure, representing a new change.",
+       "Confirmed rock outcropping. Matches historical survey data with no morphological changes.",
+       "Acoustic scatter consistent with a newly formed sand wave formation or migrating dune.",
+       "Unusual linear feature intersecting the main navigational channel. Review recommended."
+     ];
+
      anomalies = Array.from({ length: anomalyCount }).map((_, i) => {
        const baseAnomaly = mockAnomalies[i % mockAnomalies.length];
        const center = harborConfig.waterCenter;
@@ -65,6 +77,8 @@ export const getAnomalies = async (filters?: AnomalyFilters, harbour?: string): 
          longitude: center.lng + randLng,
          overallScore: 50 + ((seed * i * 7) % 50),
          depthMeters: 10 + ((seed * i * 3) % 40),
+         confidence: 70 + ((seed * i * 11) % 30),
+         explanation: explanations[(seed + i) % explanations.length],
          severity: ['normal', 'unusual', 'high'][(seed + i) % 3] as any,
          classification: ['unknown', 'known', 'false_positive'][(seed + i * 2) % 3] as any,
        };
