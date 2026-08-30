@@ -151,23 +151,23 @@ const AppShell: React.FC<{ children: React.ReactNode }> = ({ children }) => {
           <main className="flex-1 flex flex-col h-full min-w-0 overflow-hidden relative z-10 bg-void">
             {/* ── Top Header ── */}
             <header className="h-14 shrink-0 bg-glass backdrop-blur-3xl border-b border-glass-border flex items-center justify-between px-6 z-30 shadow-[0_4px_24px_rgba(0,0,0,0.5)]">
-              <div className="flex items-center gap-3">
+              <div className="flex items-center gap-3 shrink-0">
                 <button
-                  className="p-2 -ml-2 text-text-muted hover:text-text-primary rounded transition-colors"
+                  className="p-2 -ml-2 text-text-muted hover:text-text-primary rounded transition-colors md:hidden"
                   onClick={() => setIsSidebarOpen(true)}
                 >
                   <Menu className="w-5 h-5" />
                 </button>
-                <div className="flex flex-col leading-tight">
+                <div className="hidden md:flex flex-col leading-tight">
                   <h1 className="text-base font-display font-light text-text-primary tracking-[0.02em]">
                     {currentNav?.label || 'S.A.G.A.R. Command'}
                   </h1>
                 </div>
               </div>
 
-              <div className="flex items-center gap-4 relative" ref={menuRef}>
+              <div className="flex items-center gap-4 relative overflow-x-auto custom-scrollbar flex-1 justify-end pl-4" ref={menuRef}>
                 {/* Active Sector Selector */}
-                <div className="relative">
+                <div className="relative shrink-0">
                   <div 
                     className="flex items-center gap-3 px-3 py-1 cursor-pointer bg-glass backdrop-blur-3xl border border-glass-border hover:bg-glass-strong hover:border-glass-border-strong rounded-xl transition-all duration-300 shadow-[0_8px_32px_rgba(0,0,0,0.2)]"
                     onClick={() => setIsHarbourMenuOpen(!isHarbourMenuOpen)}
@@ -213,16 +213,16 @@ const AppShell: React.FC<{ children: React.ReactNode }> = ({ children }) => {
                   )}
                 </div>
 
-                <div className="w-px h-6 bg-glass-strong mx-2 hidden lg:block" />
+                <div className="w-px h-6 bg-glass-strong mx-2 shrink-0" />
 
                 {/* Live clock */}
-                <div className="hidden lg:flex items-center text-[10px] font-mono text-text-muted tracking-wider px-3 py-1.5 bg-glass backdrop-blur-sm border border-glass-border rounded-xl shadow-[0_4px_16px_rgba(0,0,0,0.1)]">
+                <div className="flex shrink-0 items-center text-[10px] font-mono text-text-muted tracking-wider px-3 py-1.5 bg-glass backdrop-blur-sm border border-glass-border rounded-xl shadow-[0_4px_16px_rgba(0,0,0,0.1)]">
                   <div className="w-1 h-1 bg-accent rounded-full mr-2.5 animate-glow-pulse shadow-[var(--glow-accent)]" />
                   {time.toLocaleString('en-IN', { timeZone: 'Asia/Kolkata', dateStyle: 'medium', timeStyle: 'medium' })} IST
                 </div>
 
                 {/* Theme Switcher */}
-                <div className="relative">
+                <div className="relative shrink-0">
                   <button
                     onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
                     className="relative p-1.5 text-text-muted hover:text-accent transition-all duration-300"
@@ -240,7 +240,7 @@ const AppShell: React.FC<{ children: React.ReactNode }> = ({ children }) => {
                 </div>
 
                 {/* Notifications */}
-                <div className="relative">
+                <div className="relative shrink-0">
                   <button
                     onClick={() => { setShowNotifications(!showNotifications); setShowUserMenu(false); }}
                     className="relative p-1.5 text-text-muted hover:text-accent transition-all duration-300"
@@ -249,7 +249,7 @@ const AppShell: React.FC<{ children: React.ReactNode }> = ({ children }) => {
                     <span className="absolute top-1 right-1 w-1.5 h-1.5 rounded-full bg-accent shadow-[var(--glow-accent)]" />
                   </button>
                   {showNotifications && (
-                    <div className="absolute right-0 top-full mt-3 w-80 bg-void/80 backdrop-blur-3xl border border-glass-border rounded-2xl shadow-[0_16px_48px_rgba(0,0,0,0.8)] overflow-hidden z-50 animate-in fade-in zoom-in-95 duration-200">
+                    <div className="absolute right-0 top-full mt-3 w-80 max-w-[90vw] bg-void/80 backdrop-blur-3xl border border-glass-border rounded-2xl shadow-[0_16px_48px_rgba(0,0,0,0.8)] overflow-hidden z-50 animate-in fade-in zoom-in-95 duration-200">
                       <div className="px-5 py-4 border-b border-glass-border bg-glass-strong">
                         <h3 className="font-display font-bold text-text-primary text-[11px] tracking-[0.1em] uppercase">Notifications</h3>
                       </div>
@@ -286,16 +286,16 @@ const AppShell: React.FC<{ children: React.ReactNode }> = ({ children }) => {
                   )}
                 </div>
 
-                <div className="h-5 w-px bg-glass-strong hidden sm:block mx-1" />
+                <div className="h-5 w-px bg-glass-strong mx-1 shrink-0" />
 
                 {/* User Menu */}
-                <div className="relative ml-2">
+                <div className="relative ml-2 shrink-0">
                   <button
                     onClick={() => { setShowUserMenu(!showUserMenu); setShowNotifications(false); }}
                     className="flex items-center gap-3 p-1 pr-3 rounded-full hover:bg-glass transition-all duration-300"
                   >
                     <AvatarBadge size="sm" showStatus />
-                    <div className="hidden md:flex flex-col items-start text-left">
+                    <div className="flex flex-col items-start text-left">
                       <span className="text-[11px] text-text-primary tracking-wide font-medium">{profile.fullName}</span>
                       <span className="text-[9px] text-text-muted font-mono tracking-widest">{profile.role}</span>
                     </div>

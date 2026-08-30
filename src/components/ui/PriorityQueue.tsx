@@ -12,6 +12,21 @@ interface PriorityQueueProps {
 }
 
 export default function PriorityQueue({ anomalies, onSelectAnomaly, onViewDetails, selectedId, isLoading }: PriorityQueueProps) {
+  const hoverTimeoutRef = React.useRef<NodeJS.Timeout | null>(null);
+
+  const handleHover = (id: string) => {
+    if (hoverTimeoutRef.current) clearTimeout(hoverTimeoutRef.current);
+    hoverTimeoutRef.current = setTimeout(() => {
+      onSelectAnomaly?.(id);
+    }, 200);
+  };
+
+  React.useEffect(() => {
+    return () => {
+      if (hoverTimeoutRef.current) clearTimeout(hoverTimeoutRef.current);
+    };
+  }, []);
+
   return (
     <div className="flex flex-col h-full relative overflow-hidden bg-transparent">
       <div className="px-5 py-4 border-b border-glass-border flex items-center justify-between shrink-0 bg-glass backdrop-blur-3xl">
@@ -50,6 +65,7 @@ export default function PriorityQueue({ anomalies, onSelectAnomaly, onViewDetail
                 <li key={anomaly.id} className="group/item relative mb-2 last:mb-0">
                   <button
                     onClick={() => onSelectAnomaly?.(anomaly.id)}
+                    onMouseEnter={() => handleHover(anomaly.id)}
                     className={`w-full text-left px-4 py-3 rounded-xl transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] flex items-center justify-between outline-none ${
                       isSelected
                         ? 'bg-glass-strong backdrop-blur-3xl border border-glass-border-strong shadow-[0_8px_32px_rgba(0,0,0,0.3)]'

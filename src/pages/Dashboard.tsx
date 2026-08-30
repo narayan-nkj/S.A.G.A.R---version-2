@@ -44,16 +44,16 @@ export default function Dashboard() {
         mapRef.current.flyTo({
           center: [selectedAnomaly.longitude, selectedAnomaly.latitude],
           zoom: 11.5,
-          speed: 2.5,
-          curve: 1.8,
+          speed: 1.8,
+          curve: 1.4,
           essential: true
         });
       } else {
         mapRef.current.flyTo({
           center: [harborConfig.lng, harborConfig.lat],
           zoom: 11.5,
-          speed: 2.5,
-          curve: 1.8,
+          speed: 1.8,
+          curve: 1.4,
           essential: true
         });
       }
@@ -111,7 +111,7 @@ export default function Dashboard() {
       }
       
       setActiveHarbour(nextHarbour);
-    }, 3500); // ~2s flight + 1.5s wait
+    }, 1500); // 1.5s wait
 
     return () => clearInterval(interval);
   }, [isAutoPatrol, activeHarbour, setActiveHarbour]);
@@ -136,13 +136,13 @@ export default function Dashboard() {
 
       {/* ── BENTO BOX LAYOUT ── */}
       <div className="absolute inset-0 z-10 p-4 md:p-6 lg:p-8 overflow-y-auto custom-scrollbar">
-        <div className="max-w-[1600px] mx-auto h-full flex flex-col xl:flex-row gap-6">
+        <div className="max-w-[1600px] mx-auto min-h-full flex flex-col xl:flex-row gap-4 lg:gap-6">
           
-          {/* LEFT COLUMN (Span 8 in a 12-col grid sense, or flex-2) */}
-          <div className="flex-[2] flex flex-col gap-6 min-w-0 h-full">
+          {/* LEFT COLUMN */}
+          <div className="flex-[2] flex flex-col gap-4 lg:gap-6 min-w-0 h-full">
             
-            {/* KPI Ribbon */}
-            <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 shrink-0">
+            {/* Top Ribbons (KPIs) - Responsive Grid */}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-3 lg:gap-4 shrink-0">
               <div className="bg-glass backdrop-blur-3xl rounded-2xl border border-glass-border shadow-[0_8px_32px_rgba(0,0,0,0.4)] overflow-hidden"><MetricCard label="Normal Regions" value={metrics?.normalRegions ?? '--'} icon={CheckCircle} colorClass="text-text-primary" isLoading={isLoading} /></div>
               <div className="bg-glass backdrop-blur-3xl rounded-2xl border border-glass-border shadow-[0_8px_32px_rgba(0,0,0,0.4)] overflow-hidden"><MetricCard label="Known Anomalies" value={metrics?.knownAnomalies ?? '--'} icon={AlertTriangle} colorClass="text-warning" isLoading={isLoading} /></div>
               <div className="bg-glass backdrop-blur-3xl rounded-2xl border border-glass-border shadow-[0_8px_32px_rgba(0,0,0,0.4)] overflow-hidden"><MetricCard label="Unknown Anomalies" value={metrics?.unknownAnomalies ?? '--'} icon={AlertCircle} colorClass="text-danger" trend="+2 since last run" trendDirection="up" isLoading={isLoading} /></div>
@@ -150,9 +150,9 @@ export default function Dashboard() {
             </div>
 
             {/* Minimap Section */}
-            <div className="flex-1 bg-glass backdrop-blur-3xl rounded-2xl border border-glass-border p-1 flex flex-col shadow-[0_8px_32px_rgba(0,0,0,0.4)] min-h-[300px] overflow-hidden relative group">
+            <div className="flex-1 bg-glass backdrop-blur-3xl rounded-2xl border border-glass-border p-1 flex flex-col shadow-[0_8px_32px_rgba(0,0,0,0.4)] min-h-[300px] md:min-h-[400px] overflow-hidden relative group">
               <div className="absolute top-4 left-4 z-10 flex items-center gap-3">
-                <h3 className="font-display font-bold text-sm uppercase tracking-[0.12em] text-text-primary px-3 py-1.5 bg-void/80 backdrop-blur-md border border-glass-border rounded-lg shadow-lg pointer-events-none">Sector Minimap</h3>
+                <h3 className="font-display font-bold text-sm uppercase tracking-[0.12em] text-text-primary px-3 py-1.5 bg-void/80 backdrop-blur-md border border-glass-border rounded-lg shadow-lg pointer-events-none hidden sm:block">Sector Minimap</h3>
                 <button 
                   onClick={() => setIsAutoPatrol(!isAutoPatrol)}
                   className={`px-3 py-1.5 text-[9px] font-bold uppercase tracking-widest rounded-lg transition-colors border shadow-lg flex items-center gap-2 ${
@@ -240,8 +240,8 @@ export default function Dashboard() {
 
           </div>
 
-          {/* RIGHT COLUMN (Span 4) */}
-          <div className="flex-[1] flex flex-col gap-6 shrink-0 min-w-[340px] xl:w-[400px] h-full">
+          {/* RIGHT COLUMN */}
+          <div className="flex-[1] flex flex-col gap-4 lg:gap-6 shrink-0 w-full xl:min-w-[340px] xl:w-[400px] h-full">
             
             {/* Inspector Node */}
             <div className="bg-glass backdrop-blur-3xl rounded-2xl border border-glass-border p-6 flex flex-col shrink-0 shadow-[0_8px_32px_rgba(0,0,0,0.4)]">

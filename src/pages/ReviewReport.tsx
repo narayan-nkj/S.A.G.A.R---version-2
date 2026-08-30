@@ -190,7 +190,7 @@ export default function ReviewReport() {
  <div className="flex-1 min-h-0 p-4 md:p-6 lg:p-8 overflow-y-auto custom-scrollbar relative z-10">
  
  {activeTab === 'review' && (
- <div className="max-w-[1600px] mx-auto h-full flex flex-col xl:flex-row gap-6">
+ <div className="max-w-[1600px] mx-auto min-h-full flex flex-col xl:flex-row gap-6">
  
  {/* Left: Queue */}
  <div className={`${paneClass} w-full xl:w-[320px] shrink-0 flex flex-col h-[400px] xl:h-full overflow-hidden`}>

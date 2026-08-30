@@ -94,7 +94,7 @@ export default function Settings() {
         <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHBhdHRlcm4gaWQ9ImdyaWQiIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHBhdGggZD0iTSAwIDEwIEwgNDAgMTAgTSAxMCAwIEwgMTAgNDAiIGZpbGw9Im5vbmUiIHN0cm9rZT0icmdiYSgyNTUsMjU1LDI1NSwwLjAyKSIgc3Ryb2tlLXdpZHRoPSIxIi8+PC9wYXR0ZXJuPjwvZGVmcz48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ1cmwoI2dyaWQpIi8+PC9zdmc+')] opacity-50 mix-blend-overlay" />
       </div>
 
-      <div className="relative z-10 flex h-full flex-col md:flex-row gap-6 max-w-6xl mx-auto p-6 w-full">
+      <div className="relative z-10 flex h-full flex-col md:flex-row gap-6 max-w-6xl mx-auto p-4 md:p-6 w-full overflow-y-auto custom-scrollbar">
       {/* Toast */}
       {toastMessage && (
         <div className="fixed top-20 right-6 bg-surface border border-success text-text-primary px-5 py-3 flex items-center gap-3 animate-in fade-in slide-in-from-top-4 z-[100] shadow-[0_0_20px_rgba(16,185,129,0.15)]">
@@ -104,7 +104,7 @@ export default function Settings() {
       )}
 
       {/* Sidebar Nav */}
-      <div className="w-full md:w-64 shrink-0 bg-glass backdrop-blur-3xl border border-glass-border rounded-2xl p-4 flex flex-col min-h-0 shadow-[0_16px_48px_rgba(0,0,0,0.4)]">
+      <div className="w-full md:w-64 shrink-0 bg-glass backdrop-blur-3xl border border-glass-border rounded-2xl p-4 flex flex-col shadow-[0_16px_48px_rgba(0,0,0,0.4)] h-fit">
         <div className="flex items-center gap-3 mb-6 pb-4 border-b border-glass-border">
           <div className="w-8 h-8 bg-glass-strong border border-glass-border rounded-lg flex items-center justify-center">
             <Anchor className="w-4 h-4 text-cyan" />
@@ -125,7 +125,7 @@ export default function Settings() {
                   : 'text-text-secondary hover:text-text-primary hover:bg-glass hover:backdrop-blur-md'
               }`}
             >
-              <tab.icon className="w-4 h-4" />
+              <tab.icon className="w-4 h-4 shrink-0" />
               {tab.label}
             </button>
           ))}
@@ -133,7 +133,7 @@ export default function Settings() {
       </div>
 
       {/* Main Panel */}
-      <GlassCard className="flex-1 p-6 flex flex-col min-h-0">
+      <GlassCard className="flex-1 p-4 md:p-6 flex flex-col h-fit">
 
         {/* ── PROFILE ── */}
         {activeTab === 'profile' && (

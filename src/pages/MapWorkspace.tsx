@@ -230,8 +230,8 @@ export default function MapWorkspace() {
 
         
         {/* ── Top: Filters ── */}
-        <div className="absolute top-6 left-6 flex pointer-events-none z-10">
-          <div className="bg-glass backdrop-blur-3xl border border-glass-border rounded-2xl p-1.5 flex items-center gap-1.5 pointer-events-auto shadow-[0_8px_32px_rgba(0,0,0,0.4)]">
+        <div className="absolute top-6 left-6 flex pointer-events-none z-10 max-w-[calc(100vw-3rem)] overflow-x-auto custom-scrollbar">
+          <div className="bg-glass backdrop-blur-3xl border border-glass-border rounded-2xl p-1.5 flex items-center gap-1.5 pointer-events-auto shadow-[0_8px_32px_rgba(0,0,0,0.4)] min-w-max">
             {['All', 'Unknown', 'Known Object', 'New Change', 'High Priority'].map(f => (
               <button
                 key={f}

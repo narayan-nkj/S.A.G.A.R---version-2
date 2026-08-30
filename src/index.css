@@ -163,6 +163,14 @@
   ::-webkit-scrollbar-thumb:hover {
     background: var(--theme-color-text-muted);
   }
+
+  .custom-scrollbar {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+  }
+  .custom-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
 }
 
 /* ═══════════════════════════════════════════════════
