@@ -10,17 +10,10 @@ interface ThemeContextType {
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const [theme, setThemeState] = useState<ThemeType>(() => {
-    const saved = localStorage.getItem('app-theme');
-    if (saved === 'dark' || saved === 'light') {
-      return saved as ThemeType;
-    }
-    return 'dark'; // fallback for missing or deprecated themes like 'glass'
-  });
+  const [theme, setThemeState] = useState<ThemeType>('dark');
 
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme);
-    localStorage.setItem('app-theme', theme);
   }, [theme]);
 
   const setTheme = (newTheme: ThemeType) => {

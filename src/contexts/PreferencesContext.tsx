@@ -13,13 +13,10 @@ interface PreferencesContextType {
 const PreferencesContext = createContext<PreferencesContextType | undefined>(undefined);
 
 export const PreferencesProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-  const [coordFormat, setCoordFormatState] = useState<CoordFormat>(() => {
-    return (localStorage.getItem('coordFormat') as CoordFormat) || 'DD';
-  });
+  const [coordFormat, setCoordFormatState] = useState<CoordFormat>('DD');
 
   const setCoordFormat = (format: CoordFormat) => {
     setCoordFormatState(format);
-    localStorage.setItem('coordFormat', format);
   };
 
   const toDMS = (deg: number, isLat: boolean) => {
