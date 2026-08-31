@@ -62,13 +62,13 @@
    LIGHT MODE — Near White Void
    ═══════════════════════════════════════════════════ */
 [data-theme="light"] {
-  --theme-color-void:           #FAFAFA;
-  --theme-color-surface:        #FFFFFF;
-  --theme-color-elevated:       #F5F5F5;
-  --theme-color-border:         #E5E5E5;
-  --theme-color-text-primary:   #000000;
-  --theme-color-text-secondary: #333333;
-  --theme-color-text-muted:     #666666;
+  --theme-color-void:           #E2E8F0;
+  --theme-color-surface:        #F8FAFC;
+  --theme-color-elevated:       #FFFFFF;
+  --theme-color-border:         #94A3B8;
+  --theme-color-text-primary:   #0F172A;
+  --theme-color-text-secondary: #334155;
+  --theme-color-text-muted:     #475569;
 
   --theme-color-accent:  #0EA5E9;
   --theme-color-cyan:    #06B6D4;
@@ -81,10 +81,10 @@
   --glow-accent: 0 0 20px rgba(14, 165, 233, 0.06);
   --glow-hover:  0 0 40px rgba(14, 165, 233, 0.04);
 
-  --theme-color-glass: rgba(0, 0, 0, 0.03);
-  --theme-color-glass-strong: rgba(0, 0, 0, 0.06);
-  --theme-color-glass-border: rgba(0, 0, 0, 0.1);
-  --theme-color-glass-border-strong: rgba(0, 0, 0, 0.15);
+  --theme-color-glass: rgba(0, 0, 0, 0.08);
+  --theme-color-glass-strong: rgba(0, 0, 0, 0.15);
+  --theme-color-glass-border: rgba(0, 0, 0, 0.3);
+  --theme-color-glass-border-strong: rgba(0, 0, 0, 0.5);
 }
 
 /* ═══════════════════════════════════════════════════
