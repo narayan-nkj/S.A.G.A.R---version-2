@@ -105,7 +105,7 @@ const AppShell: React.FC<{ children: React.ReactNode }> = ({ children }) => {
           {/* ══ SIDEBAR ══ */}
           <aside className={`
             w-64 bg-glass backdrop-blur-3xl border-r border-glass-border flex flex-col shrink-0 shadow-[4px_0_24px_rgba(0,0,0,0.5)]
-            fixed inset-y-0 left-0 z-40 transform transition-transform duration-300 ease-in-out
+            fixed inset-y-0 left-0 z-40 transform transition-transform duration-300 ease-in-out md:relative md:translate-x-0
             ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'}
           `}>
             {/* Logo */}

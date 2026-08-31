@@ -37,28 +37,33 @@ export default function Dashboard() {
   const selectedAnomaly = liveAnomalies.find(a => a.id === selectedAnomalyId);
   const harborConfig = HARBOURS[activeHarbour] || HARBOURS['Mumbai Harbor Q3'];
 
+  const selectedAnomalyLat = selectedAnomaly?.latitude;
+  const selectedAnomalyLng = selectedAnomaly?.longitude;
+  const harborLat = harborConfig?.lat;
+  const harborLng = harborConfig?.lng;
+
   // Map flyTo logic
   useEffect(() => {
     if (mapRef.current) {
-      if (selectedAnomaly) {
+      if (selectedAnomalyLat && selectedAnomalyLng) {
         mapRef.current.flyTo({
-          center: [selectedAnomaly.longitude, selectedAnomaly.latitude],
+          center: [selectedAnomalyLng, selectedAnomalyLat],
           zoom: 11.5,
-          speed: 1.8,
+          speed: 1.2,
           curve: 1.4,
           essential: true
         });
-      } else {
+      } else if (harborLat && harborLng) {
         mapRef.current.flyTo({
-          center: [harborConfig.lng, harborConfig.lat],
+          center: [harborLng, harborLat],
           zoom: 11.5,
-          speed: 1.8,
+          speed: 1.2,
           curve: 1.4,
           essential: true
         });
       }
     }
-  }, [selectedAnomalyId, activeHarbour, selectedAnomaly, harborConfig]);
+  }, [selectedAnomalyLat, selectedAnomalyLng, harborLat, harborLng]);
 
   const isFirstLoad = useRef(true);
   const patrolIndicesRef = useRef<Record<string, number>>({});
@@ -111,7 +116,7 @@ export default function Dashboard() {
       }
       
       setActiveHarbour(nextHarbour);
-    }, 1500); // 1.5s wait
+    }, 4000); // 4s wait
 
     return () => clearInterval(interval);
   }, [isAutoPatrol, activeHarbour, setActiveHarbour]);

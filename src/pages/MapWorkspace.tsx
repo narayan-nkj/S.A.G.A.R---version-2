@@ -32,6 +32,7 @@ export default function MapWorkspace() {
   const [zoomState, setZoomState] = useState(0); // 0: zoomed out, 1: mid zoom, 2: zoomed in
   const harbourMarkersRef = useRef<{ [key: string]: HTMLDivElement | null }>({});
   const anomalyMarkersRef = useRef<{ [key: string]: HTMLDivElement | null }>({});
+  const isFirstRender = useRef(true);
 
   const [showSonarModal, setShowSonarModal] = useState(false);
   const [showExplanationDrawer, setShowExplanationDrawer] = useState(false);
@@ -125,6 +126,10 @@ export default function MapWorkspace() {
 
   // Jump map when harbour changes
   useEffect(() => {
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      return;
+    }
     mapRef.current?.flyTo({
       center: [harborConfig.lng, harborConfig.lat],
       zoom: 11.5,
@@ -160,13 +165,7 @@ export default function MapWorkspace() {
                       <div
                         ref={el => { if (el) harbourMarkersRef.current[name] = el; }}
                         className={`flex flex-col items-center group cursor-pointer relative transition-opacity duration-300 ${zoomState === 1 ? 'opacity-0 pointer-events-none' : 'opacity-100 pointer-events-auto'}`}
-                        onClick={e => { e.stopPropagation(); setActiveHarbour(name); mapRef.current?.flyTo({ 
-                    center: [coords.lng, coords.lat], 
-                    zoom: 11.5, 
-                    duration: 2000,
-                    curve: 1.2,
-                    essential: true 
-                  }); }}
+                        onClick={e => { e.stopPropagation(); setActiveHarbour(name); }}
               >
                 {name === activeHarbour && (
                   <div className="absolute -inset-6 rounded-sm border border-dashed border-accent/50 bg-accent/5 pointer-events-none -translate-y-4">
