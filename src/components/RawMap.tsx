@@ -73,12 +73,23 @@ export const Map = forwardRef(({ initialViewState, children, onIdle }: any, ref:
           crossSourceCollisions: false,
         });
 
-        mapInstance.on('idle', (e) => {
+        mapInstance.on('load', (e) => {
           if (isMounted) setIsLoaded(true);
+        });
+        
+        mapInstance.on('idle', (e) => {
           if (onIdle) onIdle(e);
         });
 
+        const ro = new ResizeObserver(() => {
+          mapInstance?.resize();
+        });
+        ro.observe(containerRef.current!);
+
         setMap(mapInstance);
+        
+        // Save resize observer to the instance so we can disconnect it on cleanup
+        (mapInstance as any)._ro = ro;
       } catch (err) {
         console.error("Failed to init map", err);
       }
@@ -88,6 +99,9 @@ export const Map = forwardRef(({ initialViewState, children, onIdle }: any, ref:
 
     return () => {
       isMounted = false;
+      if (mapInstance && (mapInstance as any)._ro) {
+        (mapInstance as any)._ro.disconnect();
+      }
       mapInstance?.remove();
     };
   }, []); // Run only once to initialize the map
