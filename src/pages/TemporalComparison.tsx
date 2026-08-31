@@ -95,54 +95,80 @@ export default function TemporalComparison() {
 
  {/* Dual panels */}
  <div className="flex-1 grid grid-cols-1 md:grid-cols-2 gap-4">
- {/* Reference */}
- <div className={`${paneClass} flex flex-col relative group transition-colors hover:border-glass-border-strong overflow-hidden`}>
- <div className="absolute top-4 left-4 bg-[#0B0E14]/80 backdrop-blur-md border border-[#30363D] px-3 py-1.5 text-[9px] font-mono text-[#E2E8F0] uppercase tracking-widest z-10 flex items-center gap-2 rounded">
- <span className="w-2 h-2 bg-[#94A3B8] rounded-full" />
- {referenceDate} · Reference
- </div>
- <div className="flex-1 bg-[#050B14] relative min-h-[220px] overflow-hidden">
- <div className="absolute inset-0 opacity-30 mix-blend-screen" style={{ backgroundImage: 'radial-gradient(circle at 50% 50%, #00E5FF 1px, transparent 1px)', backgroundSize: '30px 30px' }} />
- <div className="absolute inset-0 opacity-20" style={{ backgroundImage: 'repeating-linear-gradient(0deg, transparent, transparent 18px, rgba(255,255,255,0.1) 18px, rgba(255,255,255,0.1) 19px)' }} />
- 
- {/* Baseline Terrain Simulation */}
- <div className="absolute top-[20%] left-[30%] w-[40%] h-[60%] bg-[radial-gradient(ellipse_at_center,_#2DD4BF_0%,_transparent_70%)] blur-[40px] opacity-10" />
- <div className="absolute top-[40%] left-[40%] w-[30%] h-[30%] bg-[radial-gradient(ellipse_at_center,_#3B82F6_0%,_transparent_60%)] blur-[20px] opacity-20" />
- 
- <div className="absolute bottom-4 right-4 text-[9px] font-mono font-bold uppercase tracking-widest text-[#94A3B8] bg-[#0B0E14]/80 backdrop-blur border border-[#30363D] px-2 py-1 rounded">0m depth</div>
- </div>
- </div>
+  {/* Reference */}
+  <div className={`${paneClass} flex flex-col relative group transition-colors hover:border-glass-border-strong overflow-hidden`}>
+  <div className="absolute top-4 left-4 bg-surface/80 backdrop-blur-md border border-border px-3 py-1.5 text-[9px] font-mono text-text-primary uppercase tracking-widest z-10 flex items-center gap-2 rounded shadow-sm">
+  <span className="w-2 h-2 bg-text-muted rounded-full" />
+  {referenceDate} · Reference
+  </div>
+  <div className="flex-1 bg-void relative min-h-[220px] overflow-hidden">
+  
+  {/* Grid & Radar Overlays */}
+  <div className="absolute inset-0 opacity-10 dark:opacity-30 mix-blend-normal dark:mix-blend-screen" style={{ backgroundImage: 'radial-gradient(circle at 50% 50%, var(--theme-color-text-muted) 1px, transparent 1px)', backgroundSize: '30px 30px' }} />
+  <div className="absolute inset-0 opacity-5 dark:opacity-20" style={{ backgroundImage: 'repeating-linear-gradient(0deg, transparent, transparent 29px, var(--theme-color-text-muted) 29px, var(--theme-color-text-muted) 30px), repeating-linear-gradient(90deg, transparent, transparent 29px, var(--theme-color-text-muted) 29px, var(--theme-color-text-muted) 30px)' }} />
+  
+  {/* Sonar Crosshairs and Rings */}
+  <div className="absolute left-1/2 top-0 bottom-0 w-[1px] bg-border opacity-50" />
+  <div className="absolute top-1/2 left-0 right-0 h-[1px] bg-border opacity-50" />
+  <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 border border-border opacity-60 rounded-full" />
+  <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-80 h-80 border border-border opacity-40 rounded-full" />
+  <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 border border-border opacity-20 rounded-full" />
+  
+  {/* Baseline Terrain Simulation */}
+  <div className="absolute top-[20%] left-[30%] w-[50%] h-[70%] bg-[radial-gradient(ellipse_at_center,_var(--theme-color-accent)_0%,_transparent_70%)] blur-[50px] opacity-20 dark:opacity-10" />
+  <div className="absolute top-[40%] left-[40%] w-[40%] h-[40%] bg-[radial-gradient(ellipse_at_center,_var(--theme-color-cyan)_0%,_transparent_60%)] blur-[30px] opacity-20 dark:opacity-10" />
+  
+  <div className="absolute bottom-4 right-4 text-[9px] font-mono font-bold uppercase tracking-widest text-text-secondary bg-surface/80 backdrop-blur border border-border px-2 py-1 rounded shadow-sm">0m depth</div>
+  {/* Scanline */}
+  <div className="absolute left-0 w-full h-[2px] bg-text-primary/20 opacity-50 blur-[1px] animate-[scanline_4s_linear_infinite]" />
+  </div>
+  </div>
 
- {/* Current */}
- <div className={`${paneClass} flex flex-col relative group transition-colors hover:border-glass-border-strong overflow-hidden`}>
- <div className="absolute top-4 left-4 bg-[#FF4D4D]/10 backdrop-blur-md border border-[#FF4D4D]/30 px-3 py-1.5 text-[9px] font-mono text-[#FF4D4D] uppercase tracking-widest z-10 flex items-center gap-2 rounded">
- <ShieldAlert className="w-3.5 h-3.5" />
- {currentDate} · Current
- </div>
- <div className="flex-1 bg-[#050B14] relative min-h-[220px] overflow-hidden">
- <div className="absolute inset-0 opacity-30 mix-blend-screen" style={{ backgroundImage: 'radial-gradient(circle at 50% 50%, #00E5FF 1px, transparent 1px)', backgroundSize: '30px 30px' }} />
- <div className="absolute inset-0 opacity-20" style={{ backgroundImage: 'repeating-linear-gradient(0deg, transparent, transparent 18px, rgba(255,255,255,0.1) 18px, rgba(255,255,255,0.1) 19px)' }} />
- 
- {/* Baseline Terrain Simulation */}
- <div className="absolute top-[20%] left-[30%] w-[40%] h-[60%] bg-[radial-gradient(ellipse_at_center,_#2DD4BF_0%,_transparent_70%)] blur-[40px] opacity-10" />
- 
- {/* Anomaly Signature (New Object) */}
- <div className="absolute top-[40%] left-[40%] w-[30%] h-[30%] bg-[radial-gradient(ellipse_at_center,_#FF4D4D_0%,_transparent_60%)] blur-[20px] opacity-40 mix-blend-screen" />
- <div className="absolute top-[45%] left-[45%] w-[20%] h-[20%] bg-[#FF4D4D] blur-[10px] opacity-20" />
- 
- {/* Heatmap delta overlay — opacity driven by slider */}
- {showChangedOnly && (
- <div
- className="absolute inset-[15%] border border-[#FF4D4D]/50 bg-[#FF4D4D]/10 flex flex-col items-center justify-center transition-all duration-500 shadow-[0_0_30px_rgba(255,77,77,0.15)] rounded-full backdrop-blur-sm"
- style={{ opacity: deltaOpacity }}
- >
- <div className="w-16 h-16 bg-[#FF4D4D] rounded-full blur-2xl opacity-50 mix-blend-screen" />
- <span className="text-[#FF4D4D] font-mono text-[9px] mt-2 relative z-10 font-bold bg-[#0B0E14] border border-[#FF4D4D]/30 px-2.5 py-1 uppercase tracking-widest rounded">+0.8m ELEV</span>
- </div>
- )}
- <div className="absolute bottom-4 right-4 text-[9px] font-mono font-bold uppercase tracking-widest text-[#94A3B8] bg-[#0B0E14]/80 backdrop-blur border border-[#30363D] px-2 py-1 rounded">0m depth</div>
- </div>
- </div>
+  {/* Current */}
+  <div className={`${paneClass} flex flex-col relative group transition-colors hover:border-glass-border-strong overflow-hidden`}>
+  <div className="absolute top-4 left-4 bg-danger/10 backdrop-blur-md border border-danger/30 px-3 py-1.5 text-[9px] font-mono text-danger uppercase tracking-widest z-10 flex items-center gap-2 rounded shadow-sm">
+  <ShieldAlert className="w-3.5 h-3.5" />
+  {currentDate} · Current
+  </div>
+  <div className="flex-1 bg-void relative min-h-[220px] overflow-hidden">
+  
+  {/* Grid & Radar Overlays */}
+  <div className="absolute inset-0 opacity-10 dark:opacity-30 mix-blend-normal dark:mix-blend-screen" style={{ backgroundImage: 'radial-gradient(circle at 50% 50%, var(--theme-color-text-muted) 1px, transparent 1px)', backgroundSize: '30px 30px' }} />
+  <div className="absolute inset-0 opacity-5 dark:opacity-20" style={{ backgroundImage: 'repeating-linear-gradient(0deg, transparent, transparent 29px, var(--theme-color-text-muted) 29px, var(--theme-color-text-muted) 30px), repeating-linear-gradient(90deg, transparent, transparent 29px, var(--theme-color-text-muted) 29px, var(--theme-color-text-muted) 30px)' }} />
+  
+  {/* Sonar Crosshairs and Rings */}
+  <div className="absolute left-1/2 top-0 bottom-0 w-[1px] bg-border opacity-50" />
+  <div className="absolute top-1/2 left-0 right-0 h-[1px] bg-border opacity-50" />
+  <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 border border-border opacity-60 rounded-full" />
+  <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-80 h-80 border border-border opacity-40 rounded-full" />
+  <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 border border-border opacity-20 rounded-full" />
+  
+  {/* Baseline Terrain Simulation */}
+  <div className="absolute top-[20%] left-[30%] w-[50%] h-[70%] bg-[radial-gradient(ellipse_at_center,_var(--theme-color-accent)_0%,_transparent_70%)] blur-[50px] opacity-20 dark:opacity-10" />
+  
+  {/* Anomaly Signature (New Object) - Increased Size */}
+  <div className="absolute top-[30%] left-[30%] w-[50%] h-[50%] bg-[radial-gradient(ellipse_at_center,_var(--theme-color-danger)_0%,_transparent_70%)] blur-[30px] opacity-40 dark:opacity-30 mix-blend-normal dark:mix-blend-screen" />
+  <div className="absolute top-[35%] left-[35%] w-[40%] h-[40%] bg-[var(--theme-color-danger)] blur-[20px] opacity-30 dark:opacity-20" />
+  
+  {/* Heatmap delta overlay — opacity driven by slider */}
+  {showChangedOnly && (
+  <div
+  className="absolute inset-[5%] border border-danger/40 bg-danger/5 flex flex-col items-center justify-center transition-all duration-500 shadow-[0_0_40px_rgba(255,77,77,0.15)] rounded-full backdrop-blur-[2px]"
+  style={{ opacity: deltaOpacity }}
+  >
+  {/* Concentric rings to simulate targeting ping */}
+  <div className="absolute inset-8 rounded-full border border-danger/30" />
+  <div className="absolute inset-16 rounded-full border border-dashed border-danger/40 animate-[spin_12s_linear_infinite]" />
+  
+  <div className="w-40 h-40 bg-[var(--theme-color-danger)] rounded-full blur-[40px] opacity-50 dark:opacity-40 mix-blend-normal dark:mix-blend-screen" />
+  <span className="text-danger font-mono text-[9px] mt-2 relative z-10 font-bold bg-surface/90 backdrop-blur-sm border border-danger/30 px-2.5 py-1 uppercase tracking-widest rounded shadow-sm">+0.8m ELEV</span>
+  </div>
+  )}
+  <div className="absolute bottom-4 right-4 text-[9px] font-mono font-bold uppercase tracking-widest text-text-secondary bg-surface/80 backdrop-blur border border-border px-2 py-1 rounded shadow-sm">0m depth</div>
+  {/* Scanline */}
+  <div className="absolute left-0 w-full h-[2px] bg-text-primary/20 opacity-50 blur-[1px] animate-[scanline_4s_linear_infinite]" />
+  </div>
+  </div>
  </div>
 
  {/* Timeline slider */}
