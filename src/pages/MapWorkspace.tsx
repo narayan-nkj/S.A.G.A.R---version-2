@@ -177,7 +177,7 @@ export default function MapWorkspace() {
                   </div>
                 )}
                 <div className={`w-3 h-3 border border-void shadow-[var(--glow-accent)] group-hover:scale-125 transition-transform z-10 relative ${name === activeHarbour ? 'bg-accent' : 'bg-text-secondary'}`} />
-                <div className="mt-1 px-1.5 py-0.5 bg-void/80 backdrop-blur border border-border text-[9px] text-text-primary uppercase tracking-[0.2em] font-light whitespace-nowrap shadow-[var(--glow-hover)]">
+                <div className={`mt-1 px-1.5 py-0.5 bg-void/80 backdrop-blur border border-border text-[9px] text-text-primary uppercase tracking-[0.2em] font-light whitespace-nowrap shadow-[var(--glow-hover)] transition-opacity duration-300 ${zoomState === 0 && name !== activeHarbour ? 'opacity-0 group-hover:opacity-100' : 'opacity-100'}`}>
                   {name}
                 </div>
               </div>
