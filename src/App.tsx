@@ -117,7 +117,7 @@ const AppShell: React.FC<{ children: React.ReactNode }> = ({ children }) => {
                   <span className="text-[8px] text-text-muted tracking-[0.3em] uppercase mt-0.5">Command</span>
                 </div>
               </div>
-              <button className="text-text-muted hover:text-text-primary transition-colors" onClick={() => setIsSidebarOpen(false)}>
+              <button className="text-text-muted hover:text-text-primary transition-colors md:hidden" onClick={() => setIsSidebarOpen(false)}>
                 <X className="w-4 h-4" />
               </button>
             </div>

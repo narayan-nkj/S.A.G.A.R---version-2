@@ -33,21 +33,40 @@ export const UserContext = createContext<UserContextType>({
 export const useUser = () => useContext(UserContext);
 
 export const UserProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [profile, setProfile] = useState<UserProfile>(defaultProfile);
-  // Default to false. It will be set to true upon login.
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [profile, setProfile] = useState<UserProfile>(() => {
+    try {
+      const saved = localStorage.getItem('sagar_profile');
+      return saved ? JSON.parse(saved) : defaultProfile;
+    } catch {
+      return defaultProfile;
+    }
+  });
+  const [isAuthenticated, setIsAuthenticated] = useState(() => {
+    return localStorage.getItem('sagar_auth') === 'true';
+  });
 
   const updateProfile = (updates: Partial<UserProfile>) => {
-    setProfile(prev => ({ ...prev, ...updates }));
+    setProfile(prev => {
+      const next = { ...prev, ...updates };
+      localStorage.setItem('sagar_profile', JSON.stringify(next));
+      return next;
+    });
   };
 
   const login = (email: string, name: string) => {
-    setProfile(prev => ({ ...prev, email, fullName: name || 'Operator' }));
+    setProfile(prev => {
+      const next = { ...prev, email, fullName: name || 'Operator' };
+      localStorage.setItem('sagar_profile', JSON.stringify(next));
+      return next;
+    });
     setIsAuthenticated(true);
+    localStorage.setItem('sagar_auth', 'true');
   };
 
   const logout = () => {
     setIsAuthenticated(false);
+    localStorage.removeItem('sagar_auth');
+    localStorage.removeItem('sagar_profile');
   };
 
   return (

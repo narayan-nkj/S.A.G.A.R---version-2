@@ -49,16 +49,16 @@ export default function Dashboard() {
         mapRef.current.flyTo({
           center: [selectedAnomalyLng, selectedAnomalyLat],
           zoom: 11.5,
-          speed: 1.2,
-          curve: 1.4,
+          duration: 2500,
+          curve: 1.0,
           essential: true
         });
       } else if (harborLat && harborLng) {
         mapRef.current.flyTo({
           center: [harborLng, harborLat],
           zoom: 11.5,
-          speed: 1.2,
-          curve: 1.4,
+          duration: 2500,
+          curve: 1.0,
           essential: true
         });
       }
@@ -116,7 +116,7 @@ export default function Dashboard() {
       }
       
       setActiveHarbour(nextHarbour);
-    }, 4000); // 4s wait
+    }, 5000); // 5s wait (2.5s animation + 2.5s stay)
 
     return () => clearInterval(interval);
   }, [isAutoPatrol, activeHarbour, setActiveHarbour]);
