@@ -75,6 +75,12 @@ export const Map = forwardRef(({ initialViewState, children, onIdle }: any, ref:
 
         mapInstance.on('load', (e) => {
           if (isMounted) setIsLoaded(true);
+          
+          // Force resize after load to fix WebGL viewport boundary glitches
+          requestAnimationFrame(() => mapInstance?.resize());
+          setTimeout(() => mapInstance?.resize(), 100);
+          setTimeout(() => mapInstance?.resize(), 500);
+          setTimeout(() => mapInstance?.resize(), 1500);
         });
         
         mapInstance.on('idle', (e) => {
@@ -82,7 +88,10 @@ export const Map = forwardRef(({ initialViewState, children, onIdle }: any, ref:
         });
 
         const ro = new ResizeObserver(() => {
-          mapInstance?.resize();
+          // Use RAF to ensure DOM has settled before telling MapLibre to resize
+          requestAnimationFrame(() => {
+            if (mapInstance) mapInstance.resize();
+          });
         });
         ro.observe(containerRef.current!);
 
