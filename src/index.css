@@ -66,9 +66,9 @@
   --theme-color-surface:        #FFFFFF;
   --theme-color-elevated:       #F5F5F5;
   --theme-color-border:         #E5E5E5;
-  --theme-color-text-primary:   #171717;
-  --theme-color-text-secondary: #525252;
-  --theme-color-text-muted:     #A3A3A3;
+  --theme-color-text-primary:   #000000;
+  --theme-color-text-secondary: #333333;
+  --theme-color-text-muted:     #666666;
 
   --theme-color-accent:  #0EA5E9;
   --theme-color-cyan:    #06B6D4;
