@@ -165,7 +165,11 @@ export default function MapWorkspace() {
                       <div
                         ref={el => { if (el) harbourMarkersRef.current[name] = el; }}
                         className={`flex flex-col items-center group cursor-pointer relative transition-opacity duration-300 ${zoomState === 1 ? 'opacity-0 pointer-events-none' : 'opacity-100 pointer-events-auto'}`}
-                        onClick={e => { e.stopPropagation(); setActiveHarbour(name); }}
+                        onClick={e => { 
+                          e.stopPropagation(); 
+                          setActiveHarbour(name);
+                          setShowAnomalyList(true); 
+                        }}
               >
                 {name === activeHarbour && (
                   <div className="absolute -inset-6 rounded-sm border border-dashed border-accent/50 bg-accent/5 pointer-events-none -translate-y-4">
@@ -262,6 +266,9 @@ export default function MapWorkspace() {
             <button onClick={() => setShowGraticule(!showGraticule)} className={`p-3 rounded-xl transition-all duration-300 group ${showGraticule ? 'bg-glass-strong text-text-primary shadow-[var(--glow-hover)]' : 'text-text-secondary hover:text-text-primary hover:bg-glass-strong'}`} title="Toggle Grid">
               <Layers className="w-4 h-4" />
             </button>
+            <button onClick={() => setShowAnomalyList(!showAnomalyList)} className={`p-3 rounded-xl transition-all duration-300 group ${showAnomalyList ? 'bg-glass-strong text-text-primary shadow-[var(--glow-hover)]' : 'text-text-secondary hover:text-text-primary hover:bg-glass-strong'}`} title="Toggle Anomalies List">
+              <List className="w-4 h-4" />
+            </button>
           </div>
         </div>
 
@@ -296,9 +303,10 @@ export default function MapWorkspace() {
       </div>
 
       {/* ══════ RIGHT COLUMN (LIST / DETAILS) ══════ */}
-      <div className="w-full lg:w-[420px] lg:p-6 lg:pl-0 flex flex-col h-[50%] lg:h-full shrink-0 relative z-20 pointer-events-none">
-        <div className="flex-1 bg-void/50 backdrop-blur-3xl border border-glass-border lg:rounded-2xl shadow-[0_8px_32px_rgba(0,0,0,0.6)] flex flex-col overflow-hidden pointer-events-auto">
-          {selectedAnomaly ? (
+      {showAnomalyList && (
+        <div className="w-full lg:w-[420px] lg:p-6 lg:pl-0 flex flex-col h-[50%] lg:h-full shrink-0 relative z-20 pointer-events-none animate-in slide-in-from-bottom lg:slide-in-from-right fade-in duration-300">
+          <div className="flex-1 bg-void/50 backdrop-blur-3xl border border-glass-border lg:rounded-2xl shadow-[0_8px_32px_rgba(0,0,0,0.6)] flex flex-col overflow-hidden pointer-events-auto">
+            {selectedAnomaly ? (
             <div className="flex flex-col h-full overflow-hidden">
               {/* Header */}
               <div className="p-6 border-b border-glass-border flex flex-col gap-4 shrink-0 bg-glass-strong">
@@ -444,7 +452,8 @@ export default function MapWorkspace() {
             </div>
           )}
         </div>
-      </div>
+        </div>
+      )}
 
       {/* ══════ SONAR MODAL ══════ */}
       {showSonarModal && (
