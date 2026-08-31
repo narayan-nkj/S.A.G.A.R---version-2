@@ -140,11 +140,11 @@ export default function Dashboard() {
       </div>
 
       {/* ── BENTO BOX LAYOUT ── */}
-      <div className="absolute inset-0 z-10 p-4 md:p-6 lg:p-8 overflow-y-auto custom-scrollbar">
-        <div className="max-w-[1600px] mx-auto min-h-full flex flex-col xl:flex-row gap-4 lg:gap-6">
+      <div className="absolute inset-0 z-10 p-4 md:p-6 lg:p-8 overflow-y-auto custom-scrollbar xl:overflow-hidden">
+        <div className="max-w-[1600px] mx-auto xl:h-full flex flex-col xl:flex-row gap-4 lg:gap-6">
           
           {/* LEFT COLUMN */}
-          <div className="flex-[2] flex flex-col gap-4 lg:gap-6 min-w-0 h-full">
+          <div className="flex-[2] flex flex-col gap-4 lg:gap-6 min-w-0 xl:min-h-0">
             
             {/* Top Ribbons (KPIs) - Responsive Grid */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-3 lg:gap-4 shrink-0">
@@ -246,7 +246,7 @@ export default function Dashboard() {
           </div>
 
           {/* RIGHT COLUMN */}
-          <div className="flex-[1] flex flex-col gap-4 lg:gap-6 shrink-0 w-full xl:min-w-[340px] xl:w-[400px] h-full">
+          <div className="flex-[1] flex flex-col gap-4 lg:gap-6 shrink-0 w-full xl:min-w-[340px] xl:w-[400px] xl:min-h-0">
             
             {/* Inspector Node */}
             <div className="bg-glass backdrop-blur-3xl rounded-2xl border border-glass-border p-6 flex flex-col shrink-0 shadow-[0_8px_32px_rgba(0,0,0,0.4)]">

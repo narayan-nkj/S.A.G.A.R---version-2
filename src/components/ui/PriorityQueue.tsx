@@ -38,7 +38,7 @@ export default function PriorityQueue({ anomalies, onSelectAnomaly, onViewDetail
         </span>
       </div>
 
-      <div className="flex-1 overflow-y-auto bg-transparent">
+      <div className="flex-1 overflow-y-auto custom-scrollbar bg-transparent">
         {isLoading ? (
           <div className="divide-y divide-border">
             {[1, 2, 3, 4].map(i => (
