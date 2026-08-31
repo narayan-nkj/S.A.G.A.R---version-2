@@ -46,10 +46,10 @@ export default function TemporalComparison() {
  <div>
  <div className="flex items-center gap-2 mb-1">
  <Anchor className="w-4 h-4 text-blue-500 opacity-70" />
- <span className="text-[10px] text-[#DCE4EF] font-mono uppercase tracking-[0.15em]">S.A.G.A.R. Command — Temporal Analysis</span>
+ <span className="text-[10px] text-text-secondary font-mono uppercase tracking-[0.15em]">S.A.G.A.R. Command — Temporal Analysis</span>
  </div>
- <h2 className="text-2xl font-display font-bold tracking-tight text-[#F5EEDD] tracking-tight">What changed beneath the surface?</h2>
- <p className="text-[#DCE4EF] mt-1 text-sm">
+ <h2 className="text-2xl font-display font-bold tracking-tight text-text-primary tracking-tight">What changed beneath the surface?</h2>
+ <p className="text-text-secondary mt-1 text-sm">
  {anomaly ? `Anomaly ${anomaly.label} — ${activeHarbour}` : 'Temporal analysis'}
  </p>
  </div>
@@ -96,50 +96,51 @@ export default function TemporalComparison() {
  {/* Dual panels */}
  <div className="flex-1 grid grid-cols-1 md:grid-cols-2 gap-4">
  {/* Reference */}
- <div className={`${paneClass} flex flex-col relative group transition-colors hover:bg-void overflow-hidden`}>
- <div className="absolute top-4 left-4 bg-void backdrop-blur-md border border-border px-3 py-1.5 text-[9px] font-mono text-text-primary uppercase tracking-widest z-10 flex items-center gap-2">
- <span className="w-2 h-2 bg-text-muted" />
+ <div className={`${paneClass} flex flex-col relative group transition-colors hover:border-glass-border-strong overflow-hidden`}>
+ <div className="absolute top-4 left-4 bg-[#0B0E14]/80 backdrop-blur-md border border-[#30363D] px-3 py-1.5 text-[9px] font-mono text-[#E2E8F0] uppercase tracking-widest z-10 flex items-center gap-2 rounded">
+ <span className="w-2 h-2 bg-[#94A3B8] rounded-full" />
  {referenceDate} · Reference
  </div>
- <div className="flex-1 bg-void relative min-h-[220px]">
- {/* Sonar dot matrix */}
- <div className="absolute inset-0 opacity-20 mix-blend-screen" style={{
- backgroundImage: 'radial-gradient(circle at 50% 50%, var(--color-cyan) 1px, transparent 1px)',
- backgroundSize: '24px 24px'
- }} />
- {/* Depth lines */}
- <div className="absolute inset-0 opacity-10" style={{
- backgroundImage: 'repeating-linear-gradient(0deg, transparent, transparent 18px, rgba(255,255,255,0.2) 18px, rgba(255,255,255,0.2) 19px)'
- }} />
- <div className="absolute bottom-4 right-4 text-[9px] font-mono font-bold uppercase tracking-widest text-text-secondary bg-void border border-border px-2 py-1">0m depth</div>
+ <div className="flex-1 bg-[#050B14] relative min-h-[220px] overflow-hidden">
+ <div className="absolute inset-0 opacity-30 mix-blend-screen" style={{ backgroundImage: 'radial-gradient(circle at 50% 50%, #00E5FF 1px, transparent 1px)', backgroundSize: '30px 30px' }} />
+ <div className="absolute inset-0 opacity-20" style={{ backgroundImage: 'repeating-linear-gradient(0deg, transparent, transparent 18px, rgba(255,255,255,0.1) 18px, rgba(255,255,255,0.1) 19px)' }} />
+ 
+ {/* Baseline Terrain Simulation */}
+ <div className="absolute top-[20%] left-[30%] w-[40%] h-[60%] bg-[radial-gradient(ellipse_at_center,_#2DD4BF_0%,_transparent_70%)] blur-[40px] opacity-10" />
+ <div className="absolute top-[40%] left-[40%] w-[30%] h-[30%] bg-[radial-gradient(ellipse_at_center,_#3B82F6_0%,_transparent_60%)] blur-[20px] opacity-20" />
+ 
+ <div className="absolute bottom-4 right-4 text-[9px] font-mono font-bold uppercase tracking-widest text-[#94A3B8] bg-[#0B0E14]/80 backdrop-blur border border-[#30363D] px-2 py-1 rounded">0m depth</div>
  </div>
  </div>
 
  {/* Current */}
- <div className={`${paneClass} flex flex-col relative group transition-colors hover:bg-void overflow-hidden`}>
- <div className="absolute top-4 left-4 bg-danger/10 backdrop-blur-md border border-danger/30 px-3 py-1.5 text-[9px] font-mono text-danger uppercase tracking-widest z-10 flex items-center gap-2">
+ <div className={`${paneClass} flex flex-col relative group transition-colors hover:border-glass-border-strong overflow-hidden`}>
+ <div className="absolute top-4 left-4 bg-[#FF4D4D]/10 backdrop-blur-md border border-[#FF4D4D]/30 px-3 py-1.5 text-[9px] font-mono text-[#FF4D4D] uppercase tracking-widest z-10 flex items-center gap-2 rounded">
  <ShieldAlert className="w-3.5 h-3.5" />
  {currentDate} · Current
  </div>
- <div className="flex-1 bg-void relative min-h-[220px]">
- <div className="absolute inset-0 opacity-20 mix-blend-screen" style={{
- backgroundImage: 'radial-gradient(circle at 50% 50%, var(--color-cyan) 1px, transparent 1px)',
- backgroundSize: '24px 24px'
- }} />
- <div className="absolute inset-0 opacity-10" style={{
- backgroundImage: 'repeating-linear-gradient(0deg, transparent, transparent 18px, rgba(255,255,255,0.2) 18px, rgba(255,255,255,0.2) 19px)'
- }} />
+ <div className="flex-1 bg-[#050B14] relative min-h-[220px] overflow-hidden">
+ <div className="absolute inset-0 opacity-30 mix-blend-screen" style={{ backgroundImage: 'radial-gradient(circle at 50% 50%, #00E5FF 1px, transparent 1px)', backgroundSize: '30px 30px' }} />
+ <div className="absolute inset-0 opacity-20" style={{ backgroundImage: 'repeating-linear-gradient(0deg, transparent, transparent 18px, rgba(255,255,255,0.1) 18px, rgba(255,255,255,0.1) 19px)' }} />
+ 
+ {/* Baseline Terrain Simulation */}
+ <div className="absolute top-[20%] left-[30%] w-[40%] h-[60%] bg-[radial-gradient(ellipse_at_center,_#2DD4BF_0%,_transparent_70%)] blur-[40px] opacity-10" />
+ 
+ {/* Anomaly Signature (New Object) */}
+ <div className="absolute top-[40%] left-[40%] w-[30%] h-[30%] bg-[radial-gradient(ellipse_at_center,_#FF4D4D_0%,_transparent_60%)] blur-[20px] opacity-40 mix-blend-screen" />
+ <div className="absolute top-[45%] left-[45%] w-[20%] h-[20%] bg-[#FF4D4D] blur-[10px] opacity-20" />
+ 
  {/* Heatmap delta overlay — opacity driven by slider */}
  {showChangedOnly && (
  <div
- className="absolute inset-1/4 border border-danger/50 bg-danger/10 flex flex-col items-center justify-center transition-all duration-500 shadow-[0_0_30px_rgba(224,87,99,0.15)]"
+ className="absolute inset-[15%] border border-[#FF4D4D]/50 bg-[#FF4D4D]/10 flex flex-col items-center justify-center transition-all duration-500 shadow-[0_0_30px_rgba(255,77,77,0.15)] rounded-full backdrop-blur-sm"
  style={{ opacity: deltaOpacity }}
  >
- <div className="w-16 h-16 bg-danger rounded-full blur-2xl opacity-40 mix-blend-screen" />
- <span className="text-danger font-mono text-[9px] mt-2 relative z-10 font-bold bg-void border border-danger/20 px-2.5 py-1 uppercase tracking-widest">+0.8m ELEV</span>
+ <div className="w-16 h-16 bg-[#FF4D4D] rounded-full blur-2xl opacity-50 mix-blend-screen" />
+ <span className="text-[#FF4D4D] font-mono text-[9px] mt-2 relative z-10 font-bold bg-[#0B0E14] border border-[#FF4D4D]/30 px-2.5 py-1 uppercase tracking-widest rounded">+0.8m ELEV</span>
  </div>
  )}
- <div className="absolute bottom-4 right-4 text-[9px] font-mono font-bold uppercase tracking-widest text-text-secondary bg-void border border-border px-2 py-1">0m depth</div>
+ <div className="absolute bottom-4 right-4 text-[9px] font-mono font-bold uppercase tracking-widest text-[#94A3B8] bg-[#0B0E14]/80 backdrop-blur border border-[#30363D] px-2 py-1 rounded">0m depth</div>
  </div>
  </div>
  </div>
