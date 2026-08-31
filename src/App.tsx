@@ -165,7 +165,7 @@ const AppShell: React.FC<{ children: React.ReactNode }> = ({ children }) => {
                 </div>
               </div>
 
-              <div className="flex items-center gap-4 relative overflow-x-auto custom-scrollbar flex-1 justify-end pl-4" ref={menuRef}>
+              <div className="flex items-center gap-4 relative flex-1 justify-end pl-4" ref={menuRef}>
                 {/* Active Sector Selector */}
                 <div className="relative shrink-0">
                   <div 
