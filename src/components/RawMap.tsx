@@ -87,11 +87,12 @@ export const Map = forwardRef(({ initialViewState, children, onIdle }: any, ref:
           if (onIdle) onIdle(e);
         });
 
+        let resizeTimeout: any;
         const ro = new ResizeObserver(() => {
-          // Use RAF to ensure DOM has settled before telling MapLibre to resize
-          requestAnimationFrame(() => {
+          if (resizeTimeout) clearTimeout(resizeTimeout);
+          resizeTimeout = setTimeout(() => {
             if (mapInstance) mapInstance.resize();
-          });
+          }, 150); // Debounce to wait for flex transitions to end
         });
         ro.observe(containerRef.current!);
 

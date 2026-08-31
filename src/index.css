@@ -269,3 +269,10 @@ input[type="range"]::-webkit-slider-thumb:hover {
 .animate-glow-pulse {
   animation: glow-pulse 3s ease-in-out infinite;
 }
+
+/* Force maplibre canvas to always stretch to container to prevent visual blanking during flex animations */
+.maplibregl-canvas {
+  width: 100% !important;
+  height: 100% !important;
+  outline: none !important;
+}
