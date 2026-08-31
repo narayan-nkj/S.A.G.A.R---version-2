@@ -94,10 +94,10 @@ const AppShell: React.FC<{ children: React.ReactNode }> = ({ children }) => {
         {/* ── Root shell: Technical Pane Architecture ── */}
         <div className="flex h-screen w-full overflow-hidden font-sans relative text-text-primary bg-void">
 
-          {/* Mobile overlay */}
+          {/* Mobile and Desktop overlay */}
           {isSidebarOpen && (
             <div
-              className="fixed inset-0 z-40 bg-void/60 md:hidden backdrop-blur-sm"
+              className="fixed inset-0 z-40 bg-void/60 backdrop-blur-sm"
               onClick={() => setIsSidebarOpen(false)}
             />
           )}
@@ -105,7 +105,7 @@ const AppShell: React.FC<{ children: React.ReactNode }> = ({ children }) => {
           {/* ══ SIDEBAR ══ */}
           <aside className={`
             w-64 bg-glass backdrop-blur-3xl border-r border-glass-border flex flex-col shrink-0 shadow-[4px_0_24px_rgba(0,0,0,0.5)]
-            fixed inset-y-0 left-0 z-40 transform transition-transform duration-300 ease-in-out md:relative md:translate-x-0
+            fixed inset-y-0 left-0 z-40 transform transition-transform duration-300 ease-in-out
             ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'}
           `}>
             {/* Logo */}
@@ -117,7 +117,7 @@ const AppShell: React.FC<{ children: React.ReactNode }> = ({ children }) => {
                   <span className="text-[8px] text-text-muted tracking-[0.3em] uppercase mt-0.5">Command</span>
                 </div>
               </div>
-              <button className="text-text-muted hover:text-text-primary transition-colors md:hidden" onClick={() => setIsSidebarOpen(false)}>
+              <button className="text-text-muted hover:text-text-primary transition-colors" onClick={() => setIsSidebarOpen(false)}>
                 <X className="w-4 h-4" />
               </button>
             </div>
@@ -153,7 +153,7 @@ const AppShell: React.FC<{ children: React.ReactNode }> = ({ children }) => {
             <header className="h-14 shrink-0 bg-glass backdrop-blur-3xl border-b border-glass-border flex items-center justify-between px-6 z-30 shadow-[0_4px_24px_rgba(0,0,0,0.5)]">
               <div className="flex items-center gap-3 shrink-0">
                 <button
-                  className="p-2 -ml-2 text-text-muted hover:text-text-primary rounded transition-colors md:hidden"
+                  className="p-2 -ml-2 text-text-muted hover:text-text-primary rounded transition-colors"
                   onClick={() => setIsSidebarOpen(true)}
                 >
                   <Menu className="w-5 h-5" />
