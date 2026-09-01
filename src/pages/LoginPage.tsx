@@ -21,7 +21,7 @@ export default function LoginPage() {
   const [error, setError] = useState('');
 
   useEffect(() => {
-    setCaptchaText(generateCaptcha());
+    Promise.resolve().then(() => setCaptchaText(generateCaptcha()));
   }, []);
 
   const handleRefreshCaptcha = () => {

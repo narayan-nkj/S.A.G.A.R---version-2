@@ -2,11 +2,10 @@ import React, { useEffect, useState, useMemo, useRef } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { Map, Source, Layer, Marker } from '../components/RawMap';
 import 'maplibre-gl/dist/maplibre-gl.css';
-import { Layers, Crosshair, Filter, Activity, Clock, Navigation, Zap, AlertTriangle, ArrowRight, FileCheck, ExternalLink, X, History, List, Plus, Minus, Compass } from 'lucide-react';
+import { Layers, Activity, Clock, Navigation, Zap, AlertTriangle, ArrowRight, ExternalLink, X, History, List, Plus, Minus, Compass } from 'lucide-react';
 
 import { getAnomalies } from '../services/api';
 import { Anomaly, HARBOURS } from '../data/mockData';
-import { useMapStyle } from '../data/mapStyle';
 import { useHarbour, useRealTimeAnomalies } from '../contexts/AppContext';
 import { usePreferences } from '../contexts/PreferencesContext';
 import StatusBadge from '../components/ui/StatusBadge';
@@ -18,7 +17,6 @@ export default function MapWorkspace() {
   const navigate = useNavigate();
   const location = useLocation();
   const { activeHarbour, setActiveHarbour } = useHarbour();
-  const mapStyle = useMapStyle();
   const { formatCoordinates, formatLat, formatLng } = usePreferences();
   const realTimeUpdates = useRealTimeAnomalies();
   const [isCompareMode, setIsCompareMode] = useState(false);
@@ -142,7 +140,6 @@ export default function MapWorkspace() {
   // Anomaly styling helpers
   const dotColor = (s: string) => s === 'high' ? 'var(--color-danger)' : s === 'unusual' ? 'var(--color-warning)' : 'var(--color-accent)';
   const ringColor = (s: string) => s === 'high' ? 'border-danger' : s === 'unusual' ? 'border-warning' : 'border-accent';
-  const severityBg = (s: string) => s === 'high' ? 'bg-danger/10 text-danger' : s === 'unusual' ? 'bg-warning/10 text-warning' : 'bg-success/10 text-success';
 
   return (
     <div className="flex flex-col lg:flex-row h-full w-full relative">

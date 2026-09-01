@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { UploadCloud, File, CheckCircle2, FileJson, Image as ImageIcon, Check, Loader2, ArrowRight, AlertCircle, Anchor } from 'lucide-react';
+import { UploadCloud, File, CheckCircle2, FileJson, Image as ImageIcon, ArrowRight, AlertCircle, Anchor } from 'lucide-react';
 import { startSurveyProcessing } from '../services/api';
 
 type ProcessState = 'upload' | 'processing' | 'complete';
@@ -12,7 +12,6 @@ export default function UploadProcess() {
   const navigate = useNavigate();
   const [appState, setAppState] = useState<ProcessState>('upload');
   const [progress, setProgress] = useState(0);
-  const [currentStep, setCurrentStep] = useState(0);
   const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
   const [showErrorToast, setShowErrorToast] = useState(false);
   const fileInputRef = React.useRef<HTMLInputElement>(null);
@@ -37,7 +36,7 @@ export default function UploadProcess() {
     let p = 0;
     let logIndex = 0;
     
-    setTerminalLogs([`> Initiating S.A.G.A.R. pipeline for survey...`]);
+    Promise.resolve().then(() => setTerminalLogs([`> Initiating S.A.G.A.R. pipeline for survey...`]));
     
     const interval = setInterval(() => {
       p += Math.random() * 5 + 1;
@@ -54,10 +53,10 @@ export default function UploadProcess() {
         clearInterval(interval);
       }
       setProgress(p);
-      setCurrentStep(Math.floor((p / 100) * steps.length));
     }, 200);
     startSurveyProcessing('surv_003');
     return () => clearInterval(interval);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [appState]);
 
   const handleStartAnalysis = () => {

@@ -97,6 +97,7 @@ export default function Dashboard() {
       isFirstLoad.current = false;
     }
     loadData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeHarbour]);
 
   // Auto patrol logic
@@ -215,7 +216,7 @@ export default function Dashboard() {
                 {isLoading ? (
                   <div className="absolute inset-0 flex items-end gap-2 animate-pulse pb-2">
                     {[...Array(24)].map((_, i) => (
-                      <div key={i} className="flex-1 bg-glass rounded-t-sm" style={{ height: `${Math.random() * 60 + 20}%` }} />
+                      <div key={i} className="flex-1 bg-glass rounded-t-sm" style={{ height: `${(Math.sin(i * 1234.5) * 0.5 + 0.5) * 60 + 20}%` }} />
                     ))}
                   </div>
                 ) : (

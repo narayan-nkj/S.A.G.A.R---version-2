@@ -31,6 +31,7 @@ export interface Anomaly {
   sonarImage: string;
   priority: "low" | "medium" | "high" | "immediate";
   notes?: string;
+  customClassName?: string;
 }
 
 export interface ModelFeedback {

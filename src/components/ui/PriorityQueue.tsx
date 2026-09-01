@@ -1,7 +1,5 @@
-import React from 'react';
-import { Anomaly } from '../../data/mockData';
 import StatusBadge from './StatusBadge';
-import { Target, ChevronRight, CheckCircle2, ArrowRight, AlertCircle } from 'lucide-react';
+import { ChevronRight, CheckCircle2, ArrowRight, AlertCircle } from 'lucide-react';
 
 interface PriorityQueueProps {
   anomalies: Anomaly[];

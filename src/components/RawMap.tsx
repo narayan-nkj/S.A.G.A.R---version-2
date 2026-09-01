@@ -1,3 +1,4 @@
+/* eslint-disable react-refresh/only-export-components */
 import React, { createContext, useContext, useEffect, useRef, useState, useMemo, forwardRef, useImperativeHandle } from 'react';
 import { createPortal } from 'react-dom';
 import * as maplibregl from 'maplibre-gl';
@@ -73,7 +74,7 @@ export const Map = forwardRef(({ initialViewState, children, onIdle }: any, ref:
           crossSourceCollisions: false,
         });
 
-        mapInstance.on('load', (e) => {
+        mapInstance.on('load', () => {
           if (isMounted) setIsLoaded(true);
           
           // Force resize after load to fix WebGL viewport boundary glitches
@@ -114,6 +115,7 @@ export const Map = forwardRef(({ initialViewState, children, onIdle }: any, ref:
       }
       mapInstance?.remove();
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []); // Run only once to initialize the map
 
   // Dynamically update map style when theme changes
@@ -174,6 +176,7 @@ export function Marker({ longitude, latitude, children, onClick, anchor = 'cente
     return () => {
       markerRef.current?.remove();
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [map, anchor, markerContainer]);
 
   useEffect(() => {
@@ -221,6 +224,7 @@ export function Source({ id, type, data, children }: any) {
         }, 0);
       }
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [map, id, type]);
 
   useEffect(() => {
@@ -274,6 +278,7 @@ export function Layer({ id, type, paint, layout, sourceId }: any) {
         map.removeLayer(id);
       }
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [map, id, type, sourceId]);
 
   return null;

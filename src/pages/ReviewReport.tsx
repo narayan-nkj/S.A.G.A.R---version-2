@@ -1,20 +1,11 @@
 import React, { useEffect, useState, useRef, useCallback } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { getAnomalies, submitReview, getReportSummary, getModelFeedback } from '../services/api';
 import { Anomaly, ReportSummary, ModelFeedback, HARBOURS } from '../data/mockData';
-import { useMapStyle } from '../data/mapStyle';
 import { Map, Marker } from '../components/RawMap';
 import 'maplibre-gl/dist/maplibre-gl.css';
 import StatusBadge from '../components/ui/StatusBadge';
 import { 
- CheckCircle, 
- AlertTriangle, 
- Search, 
- ChevronRight, 
- ZoomIn, 
- Crosshair, 
- Save, 
- ArrowRight,
  List,
  FileCheck, 
  FileText, 
@@ -37,9 +28,7 @@ const paneClass = 'bg-surface border border-border shadow-[0_8px_32px_rgba(0,0,0
 
 export default function ReviewReport() {
  const navigate = useNavigate();
- const { id } = useParams();
  const { activeHarbour } = useHarbour();
- const mapStyle = useMapStyle();
  const { formatCoordinates } = usePreferences();
  const [activeTab, setActiveTab] = useState<Tab>('review');
  const [anomalies, setAnomalies] = useState<Anomaly[]>([]);
@@ -77,8 +66,8 @@ export default function ReviewReport() {
 
  // Initial load when harbour changes
  useEffect(() => {
- setPage(1);
- fetchAnomalies(1, true);
+ Promise.resolve().then(() => setPage(1));
+ Promise.resolve().then(() => fetchAnomalies(1, true));
  getReportSummary('surv_001').then(setReportData);
  getModelFeedback().then(setFeedbackData);
  }, [activeHarbour, fetchAnomalies]);
@@ -104,7 +93,7 @@ export default function ReviewReport() {
  // Fetch more when page changes
  useEffect(() => {
  if (page > 1) {
- fetchAnomalies(page);
+ Promise.resolve().then(() => fetchAnomalies(page));
  }
  }, [page, fetchAnomalies]);
 
@@ -217,7 +206,7 @@ export default function ReviewReport() {
  <Check className="w-3 h-3 text-success" />
  )}
  </div>
- <StatusBadge status={anomaly.reviewStatus} />
+ <StatusBadge status={anomaly.reviewStatus} label={anomaly.customClassName || undefined} />
  {anomaly.notes && (
  <div className="mt-1 text-[9px] font-mono text-text-secondary bg-surface p-2 border border-border text-left truncate">
  <span className="text-cyan font-bold uppercase">NOTES:</span> {anomaly.notes}
@@ -373,7 +362,22 @@ export default function ReviewReport() {
  </div>
  
  <div className="relative flex flex-col gap-2">
+ <div className="flex items-center justify-between">
  <label className="text-[10px] text-text-secondary uppercase tracking-[0.2em] font-bold flex items-center gap-2"><MessageSquare className="w-3.5 h-3.5" /> Operator Notes</label>
+ {notes && (
+   <button 
+     onClick={() => {
+       setNotes('');
+       if (selectedId) {
+         setAnomalies(prev => prev.map(a => a.id === selectedId ? { ...a, notes: '' } : a));
+       }
+     }}
+     className="text-[9px] text-text-secondary hover:text-danger uppercase tracking-wider font-bold transition-colors"
+   >
+     Clear
+   </button>
+ )}
+ </div>
  <textarea 
  value={notes}
  onChange={e => setNotes(e.target.value)}
@@ -425,7 +429,7 @@ export default function ReviewReport() {
  </button>
  <button onClick={async () => {
  try { await navigator.clipboard.writeText(window.location.href); triggerToast('Link copied!'); } 
- catch (err) { triggerToast('Failed to copy', 'info'); }
+ catch (err) { console.error(err); triggerToast('Failed to copy', 'info'); }
  }} className="bg-cyan/10 hover:bg-cyan/20 border border-cyan/30 text-cyan text-[10px] font-bold uppercase tracking-widest px-4 py-2 transition-colors flex items-center gap-2 ml-auto">
  <Share2 className="w-3 h-3" /> Share Demo Link
  </button>
@@ -519,7 +523,7 @@ export default function ReviewReport() {
  <span className="text-[10px] text-text-secondary">{a.overallScore}</span>
  </div>
  </td>
- <td className="px-4 py-2.5"><StatusBadge status={a.reviewStatus} /></td>
+ <td className="px-4 py-2.5"><StatusBadge status={a.reviewStatus} label={a.customClassName || undefined} /></td>
  </tr>
  ))}
  </tbody>
@@ -546,7 +550,7 @@ export default function ReviewReport() {
  const updated = await submitReview(selectedId!, { status: 'confirmed_unknown', newClass: newClassName.trim() });
  setAnomalies(prev => prev.map(a => a.id === selectedId ? updated : a));
  triggerToast(`Class '${newClassName}' added successfully`);
- } catch (e) {}
+ } catch (e) { console.error(e); }
  setShowNewClassModal(false);
  setNewClassName('');
  }
@@ -572,7 +576,7 @@ export default function ReviewReport() {
  const updated = await submitReview(selectedId!, { status: 'confirmed_unknown', newClass: newClassName.trim() });
  setAnomalies(prev => prev.map(a => a.id === selectedId ? updated : a));
  triggerToast(`Class '${newClassName}' added successfully`);
- } catch (e) {}
+ } catch (e) { console.error(e); }
  setShowNewClassModal(false);
  setNewClassName('');
  }

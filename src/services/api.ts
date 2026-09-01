@@ -163,7 +163,7 @@ export const submitReview = async (anomalyId: string, decision: ReviewDecision):
     ...baseAnomaly,
     reviewStatus: decision.status,
     classification,
-    label: newClass ? newClass : baseAnomaly.label
+    customClassName: newClass
   } as Anomaly;
   
   // Mutate mockAnomalies so changes persist across tabs
@@ -198,7 +198,7 @@ export const getModelFeedback = async (): Promise<ModelFeedback> => {
 export const subscribeToRealTimeAnomalies = (
   harbour: string,
   onUpdate: (anomalyId: string, updates: Partial<Anomaly>) => void,
-  onNew: (anomaly: Anomaly) => void
+  _onNew: (anomaly: Anomaly) => void
 ) => {
   console.log(`[WS] Subscribed to real-time anomalies for ${harbour}`);
   

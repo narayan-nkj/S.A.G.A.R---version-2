@@ -11,7 +11,7 @@ const ToggleSwitch: React.FC<{ checked: boolean; onChange: () => void }> = ({ ch
   </label>
 );
 
-const paneClass = 'bg-glass backdrop-blur-3xl border border-glass-border rounded-2xl shadow-[0_16px_48px_rgba(0,0,0,0.4)] relative overflow-hidden';
+// const paneClass = 'bg-glass backdrop-blur-3xl border border-glass-border rounded-2xl shadow-[0_16px_48px_rgba(0,0,0,0.4)] relative overflow-hidden';
 
 const GlassCard: React.FC<{ children: React.ReactNode; className?: string }> = ({ children, className = '' }) => (
   <div className={`bg-glass backdrop-blur-3xl border border-glass-border rounded-2xl shadow-[0_16px_48px_rgba(0,0,0,0.4)] relative overflow-hidden ${className}`}>

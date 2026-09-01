@@ -1,6 +1,6 @@
-import React, { createContext, useContext, useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { BrowserRouter as Router, Routes, Route, NavLink, useLocation, Navigate, useNavigate } from 'react-router-dom';
-import { LayoutDashboard, UploadCloud, Map, History, FileCheck, Bell, User, Menu, X, Anchor, Palette, Sun, Moon } from 'lucide-react';
+import { LayoutDashboard, UploadCloud, Map, History, FileCheck, Bell, User, Menu, X, Anchor, Sun, Moon } from 'lucide-react';
 import Dashboard from './pages/Dashboard'; // trigger refresh
 import UploadProcess from './pages/UploadProcess';
 import MapWorkspace from './pages/MapWorkspace';
@@ -8,7 +8,7 @@ import TemporalComparison from './pages/TemporalComparison';
 import ReviewReport from './pages/ReviewReport';
 import Settings from './pages/Settings';
 import { usePreferences } from './contexts/PreferencesContext';
-import { useTheme, ThemeType } from './contexts/ThemeContext';
+import { useTheme } from './contexts/ThemeContext';
 import { useUser, UserProvider } from './contexts/UserContext';
 import { subscribeToRealTimeAnomalies } from './services/api';
 import { HARBOURS } from './data/mockData';
