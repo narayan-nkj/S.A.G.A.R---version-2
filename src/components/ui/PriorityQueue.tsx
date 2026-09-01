@@ -1,3 +1,5 @@
+import React from 'react';
+import { Anomaly } from '../../data/mockData';
 import StatusBadge from './StatusBadge';
 import { ChevronRight, CheckCircle2, ArrowRight, AlertCircle } from 'lucide-react';
 
